@@ -1,7 +1,7 @@
 BACKUP_NAME="backup-$(date +%Y-%m-%d).sql.gz"
 
 
-DATABASES=`mysql --user=$MYSQL_USER --password=$MYSQL_PASSWORD --host=$MYSQL_HOST -Nse "SELECT GROUP_CONCAT(SCHEMA_NAME SEPARATOR ' ') FROM information_schema.SCHEMATA WHERE SCHEMA_NAME NOT IN ('mysql','information_schema','performance_schema','sys');"`
+DATABASES=`mysql --user=$MYSQL_USER --password=$MYSQL_PASSWORD --host=$MYSQL_HOST --port=$MYSQL_PORT -Nse "SELECT GROUP_CONCAT(SCHEMA_NAME SEPARATOR ' ') FROM information_schema.SCHEMATA WHERE SCHEMA_NAME NOT IN ('mysql','information_schema','performance_schema','sys');"`
 
 echo $DATABASES
 FOLDER_NAME="$(date +%Y-%m-%d)"
@@ -12,7 +12,7 @@ mkdir /$BACKUP_DIR/$FOLDER_NAME
 for db in $DATABASES; do
     if [[ "$db" != "information_schema" ]] && [[ "$db" != _* ]] ; then
         echo -e "\nDumping database: $db to Folder >>  $BACKUP_DIR/$FOLDER_NAME/$db-$BACKUP_NAME"
-        mysqldump --user=${MYSQL_USER} --password=${MYSQL_PASSWORD} --host=$MYSQL_HOST ${db} | gzip > $BACKUP_DIR/$FOLDER_NAME/$db-$BACKUP_NAME
+        mysqldump --user=${MYSQL_USER} --password=${MYSQL_PASSWORD} --host=$MYSQL_HOST --port=$MYSQL_PORT ${db} | gzip > $BACKUP_DIR/$FOLDER_NAME/$db-$BACKUP_NAME
         echo -e "Finished dump $db-$BACKUP_NAME\n"
     fi
 done

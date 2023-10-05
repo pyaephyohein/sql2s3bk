@@ -16,5 +16,5 @@ AWS_DEFAULT_REGION=
 
 
 ```bash
-docker run --rm --name mysql2s3 -e AWS_ACCESS_KEY_ID= -e AWS_SECRET_ACCESS_KEY= -e AWS_DEFAULT_REGION= -e BUCKET_NAME= -e MYSQL_USER= -e MYSQL_PASSWORD= -e MYSQL_ROOT_PASSWORD= -e MYSQL_HOST=  pyaephyohein/mysql2s3bk:alpha sh /apps/src/backup.sh
+docker run --rm --name mysql2s3 -e AWS_ACCESS_KEY_ID= -e AWS_SECRET_ACCESS_KEY= -e AWS_DEFAULT_REGION= -e BUCKET_NAME= -e MYSQL_USER= -e MYSQL_PASSWORD= -e MYSQL_ROOT_PASSWORD= -e MYSQL_HOST=  -e MYSQL_PORT= pyaephyohein/mysql2s3bk:alpha sh /apps/src/backup.sh
 ```
